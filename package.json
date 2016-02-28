@@ -1,0 +1,28 @@
+{
+  "name": "cat-tree",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/tree.js",
+  "scripts": {
+    "dev": "node node_modules/.bin/cat-server",
+    "pre-publish": "node node_modules/.bin/pre-publish"
+  },
+  "author": "wanggengzhou, yanweiqing",
+  "license": "MIT",
+  "files": [
+    "assets/",
+    "dist/",
+    "examples/",
+    "src/"
+  ],
+  "dependencies": {
+    "cat-panel": "^1.x",
+    "cat-util": "^1.0.8",
+    "myui-core": "^0.1.0",
+    "react": "^0.14.x"
+  },
+  "devDependencies": {
+    "regether-rc-server": "^0.x",
+    "react-dom": "^0.14.x"
+  }
+}

@@ -3,7 +3,6 @@ import List from './list';
 import Item from './item';
 
 export default class Tree extends Component {
-
     static propTypes = {
         selected: React.PropTypes.string,
         dynamic: React.PropTypes.bool,
@@ -19,7 +18,7 @@ export default class Tree extends Component {
         open: true,     // 根组件默认展开
         selectKey: 'name',  // 匹配默认的key值
         opened: false,
-        prefixName: 'cat'   // 前缀名
+        prefixName: 'rs'   // 前缀名
     }
 
     state = {

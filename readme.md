@@ -1,4 +1,4 @@
-# Tree 组件
+# React Salt - Tree 组件
 
 你想要什么样的Tree？
 * 展示特定数据结构的数据，可以设置默认值、选定值，选定的可以张开
@@ -26,8 +26,8 @@
 
 ```
 [{
-    name: '美团网'
-    href: 'www.meituan.com',
+    name: 'GitHub'
+    href: 'github.com/Sobranier',
     icon: 'glyphicon-film'
     children: []
 }]

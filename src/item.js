@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { setClass } from 'cat-util';
+import { setClass } from 'rs-util';
 import List from './list';
 
 export default class Item extends Component {
@@ -41,6 +41,9 @@ export default class Item extends Component {
     }
 
     _handleClick(event) {
+        if (this.props.data.children) {
+            event.preventDefault();
+        }
         this.props.onClick([this.props.data]);
     }
 

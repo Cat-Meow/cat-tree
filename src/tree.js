@@ -18,7 +18,7 @@ export default class Tree extends Component {
         open: true,     // 根组件默认展开
         selectKey: 'name',  // 匹配默认的key值
         opened: false,
-        prefixName: 'rs'   // 前缀名
+        prefixName: 'salt'   // 前缀名
     }
 
     state = {

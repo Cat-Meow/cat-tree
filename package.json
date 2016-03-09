@@ -1,6 +1,6 @@
 {
   "name": "rs-tree",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "",
   "main": "./dist/tree.js",
   "scripts": {
@@ -16,7 +16,6 @@
     "src/"
   ],
   "dependencies": {
-    "rs-panel": "^0.1.x",
     "rs-util": "^0.1.x",
     "rs-ui-core": "^0.1.x",
     "react": "^0.14.x"

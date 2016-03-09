@@ -13,7 +13,7 @@ export default class Example extends Component {
     render() {
         return (
             <div style={{width: '200px'}}>
-                <Tree {...this.state} opened/>
+                <Tree {...this.state} opened className="salt-tree-ui" />
             </div>
         );
     }

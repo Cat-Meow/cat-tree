@@ -9,7 +9,8 @@ export default class Tree extends Component {
         open: React.PropTypes.bool,
         selectKey: React.PropTypes.string,
         opened: React.PropTypes.bool,
-        prefixName: React.PropTypes.string
+        prefixName: React.PropTypes.string,
+        className: React.PropTypes.string
     }
 
     static defaultProps = {
@@ -18,7 +19,8 @@ export default class Tree extends Component {
         open: true,     // 根组件默认展开
         selectKey: 'name',  // 匹配默认的key值
         opened: false,
-        prefixName: 'salt'   // 前缀名
+        prefixName: 'salt',   // 前缀名
+        className: ''
     }
 
     state = {
@@ -81,12 +83,12 @@ export default class Tree extends Component {
     }
 
     render() {
-        let { prefixName, data } = this.props,
+        let { prefixName, data, className } = this.props,
             { active, selected } = this.state,
             Component = Array.isArray(data) ? List : Item;
 
         return (
-            <div className={`${prefixName}-tree`}>
+            <div className={`${prefixName}-tree ${className}`}>
                 <Component
                     {...this.props}
                     active={active}

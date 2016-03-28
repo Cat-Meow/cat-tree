@@ -14,14 +14,16 @@ export default class Item extends Component {
 
     constructor(props) {
         super(props);
-        let status = this._isSelected('open', this.props);
+        let status = this.isSelected('open', this.props);
         this.state = {
             open: status,
             selected: status
         };
+        this.handleListClick = this.handleListClick.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    _isSelected(type, props) {
+    isSelected(type, props) {
         let { active, selected, data, selectKey } = props;
         switch (type) {
             case 'open':
@@ -40,27 +42,27 @@ export default class Item extends Component {
         return false;
     }
 
-    _handleClick(event) {
+    handleClick(event) {
         if (this.props.data.children) {
             event.preventDefault();
         }
         this.props.onClick([this.props.data]);
     }
 
-    _handleListClick(actives) {
+    handleListClick(actives) {
         actives.push(this.props.data);
         this.props.onClick(actives);
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            open: this._isSelected('open', nextProps),
-            selected: this._isSelected('selected', nextProps)
+            open: this.isSelected('open', nextProps),
+            selected: this.isSelected('selected', nextProps)
         });
     }
 
     // render Icon
-    _renderIcon() {
+    renderIcon() {
         let { data } = this.props,
             icon = data.icon;
         if (!icon) {
@@ -73,7 +75,7 @@ export default class Item extends Component {
             }
         }
     }
-    _renderSubIcon() {
+    renderSubIcon() {
         let { data, opened } = this.props,
             { open } = this.state,
             iStyle = {
@@ -88,7 +90,7 @@ export default class Item extends Component {
     }
 
     // render 子Ul
-    _renderSubList() {
+    renderSubList() {
         let { data, selected, active, selectKey, opened } = this.props,
             { open } = this.state;
 
@@ -96,11 +98,15 @@ export default class Item extends Component {
             active.pop();
         }
 
-        if (!data.children) {
-            return null;
-        } else {
-            return <List data={data.children} open={open} opened={opened} selected={selected} active={active} selectKey={selectKey} onClick={this._handleListClick.bind(this)}/>;
-        }
+        return data.children && <List
+                                    data={data.children}
+                                    open={open}
+                                    opened={opened}
+                                    selected={selected}
+                                    active={active}
+                                    selectKey={selectKey}
+                                    onClick={this.handleListClick}
+                                />;
     };
 
     render() {
@@ -108,17 +114,18 @@ export default class Item extends Component {
             { selected } = this.state,
             classNames = setClass({
                 'selected' : selected,
-                'hidden': data.hidden
+                'hidden': data.hidden,
+                [data.className ? data.className : ''] : true
             });
 
         return (
             <li className={classNames} >
-                <a href={data.href} onClick={this._handleClick.bind(this)} >
-                    { this._renderIcon() }
+                <a href={data.href} onClick={this.handleClick} >
+                    { this.renderIcon() }
                     <span>{data.name}</span>
-                    { this._renderSubIcon() }
+                    { this.renderSubIcon() }
                 </a>
-                { this._renderSubList() }
+                { this.renderSubList() }
             </li>
         );
     }

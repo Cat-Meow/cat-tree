@@ -15,31 +15,37 @@ export default class Tree extends Component {
 
     static defaultProps = {
         selected: '',   // 选中的, 这里默认的key是href
-        dynamic: true,     // 是否接受外界新数据, 如果设置false，组件将默认全部展开，且点击不折叠
+        dynamic: true,     // 是否接受外界新数据
         open: true,     // 根组件默认展开
-        selectKey: 'name',  // 匹配默认的key值
-        opened: false,
+        selectKey: 'href',  // 匹配默认的key值
+        opened: false,  // 如果设置true，组件将默认全部展开，且点击不折叠
         prefixName: 'salt',   // 前缀名
         className: ''
     }
 
-    state = {
-        active: this._getActive(this.props),
-        selected: this._getActive(this.props)
+    constructor(props) {
+        super(props);
+        let initer = this.getActive(this.props);
+        this.state = {
+            active: initer,
+            selected: initer
+        };
+
+        this.handleClick = this.handleClick.bind(this);
     }
 
     filterData(data, selected) {
         let result = [];
         let length = data.length;
-        let self = this;
+        let key = this.props.selectKey;
 
         for (var i = 0; i < length; i ++) {
             let item = data[i];
-            if (item.href === selected) {
+            if (item[key] === selected) {
                 result = [item];
                 break;
-            } else if(item.children){
-                result = self.filterData(item.children, selected );
+            } else if (item.children) {
+                result = this.filterData(item.children, selected );
                 if (result.length > 0) {
                     result.push(item);
                     break;
@@ -49,7 +55,7 @@ export default class Tree extends Component {
         return result;
     }
 
-    _getActive(props) {
+    getActive(props) {
         let { data, selected } = props;
         if (!Array.isArray(data)) {
             data = [data];
@@ -60,7 +66,7 @@ export default class Tree extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.dynamic) {
-            let active = this._getActive(nextProps);
+            let active = this.getActive(nextProps);
 
             this.setState({
                 active: active,
@@ -69,11 +75,13 @@ export default class Tree extends Component {
         }
     }
 
+    // dynamic设置为false的情况下，组件不接受外界更新
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.data !== this.props.data || this.props.dynamic;
+        return nextProps.dynamic;
     }
 
-    _handleClick(active) {
+    // 告知外界目前正在选择的对象
+    handleClick(active) {
         this.setState({
             active: active
         });
@@ -83,9 +91,9 @@ export default class Tree extends Component {
     }
 
     render() {
-        let { prefixName, data, className } = this.props,
-            { active, selected } = this.state,
-            Component = Array.isArray(data) ? List : Item;
+        let { prefixName, data, className } = this.props;
+        let { active, selected } = this.state;
+        let Component = Array.isArray(data) ? List : Item;
 
         return (
             <div className={`${prefixName}-tree ${className}`}>
@@ -93,7 +101,7 @@ export default class Tree extends Component {
                     {...this.props}
                     active={active}
                     selected={selected}
-                    onClick={this::this._handleClick}
+                    onClick={this.handleClick}
                 />
             </div>      
         );

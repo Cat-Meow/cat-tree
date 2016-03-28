@@ -17,17 +17,22 @@ export default class List extends Component {
         active: []
     };
 
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
     // Ul Click 仅传递
-    _handleClick(actives) {
+    handleClick(actives) {
         this.props.onClick(actives);
     };
 
     render() {
-        let { data, open, selected, active, selectKey, opened } = this.props,
-            divStyle = {
+        let { data, open, selected, active, selectKey, opened } = this.props;
+        let divStyle = {
                 display: open || opened ? 'block' : 'none'
-            },
-            self = this;
+            };
+        let self = this;
 
         return (
             <ul style={divStyle}>
@@ -41,7 +46,7 @@ export default class List extends Component {
                                 selected={selected}
                                 active={active}
                                 selectKey={selectKey}
-                                onClick={self::self._handleClick}
+                                onClick={self.handleClick}
                             />
                         );
                     })

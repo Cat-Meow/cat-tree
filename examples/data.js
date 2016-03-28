@@ -10,6 +10,7 @@ export default [{
         name: '售价优劣势情况',
         href: '/price/weak-selling-price',
         icon: 'glyphicon glyphicon-pencil',
+        className: 'test'
     }, {
         name: '区域/城市劣势情况',
         children: [{

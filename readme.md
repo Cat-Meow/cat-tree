@@ -32,3 +32,12 @@
     children: []
 }]
 ```
+
+其他API
+
+* dynamic: 是否接受外界新数据，默认为true，设置为false则不再接受外界新数据
+* open: 初始状态是否展开
+* opened: 组件默认全部展开，且点击不折叠
+* className: 自定义类名，将会附加在组件默认类后
+* selectKey: 使用哪一个属性进行匹配,默认是href
+* selected: 选中的值

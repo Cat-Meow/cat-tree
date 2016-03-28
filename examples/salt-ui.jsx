@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Tree from '../src/tree.js';
 import DATA from './data';
-import '../assets/index.less';
 
 export default class Example extends Component {
 

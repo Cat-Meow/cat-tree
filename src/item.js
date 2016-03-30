@@ -120,7 +120,7 @@ export default class Item extends Component {
 
         return (
             <li className={classNames} >
-                <a href={data.href} onClick={this.handleClick} target={`data.target ?   data.target : '_self'`}>
+                <a href={data.href} onClick={this.handleClick} target={`${data.target ?   data.target : '_self'}`}>
                     { this.renderIcon() }
                     <span>{data.name}</span>
                     { this.renderSubIcon() }
